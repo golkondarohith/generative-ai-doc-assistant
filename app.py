@@ -49,6 +49,8 @@ def main():
                 st.write(text_chunks)
                 #create vector store
                 vectorstore = get_vectorstore(text_chunks)
+                st.write("Number of embedded chunks:", len(vectorstore.index_to_docstore_id))
+
 
 if __name__ == '__main__':
     main()
