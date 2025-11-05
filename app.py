@@ -1,14 +1,25 @@
 import streamlit as st
 from dotenv import load_dotenv
 from pypdf import PdfReader
+
+# ✅ Text splitter is still in core langchain
 from langchain.text_splitter import CharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.chat_models import ChatOpenAI
-from langchain.vectorstores import FAISS
-from langchain.memory import ConversationBufferMemory
+
+# ✅ Vector store integrations live in langchain_community
+from langchain_community.vectorstores import FAISS
+
+# ✅ Conversational chain is core, so this stays the same
 from langchain.chains import ConversationalRetrievalChain
+
+# ✅ Memory is core
+from langchain.memory import ConversationBufferMemory
+
+# ✅ Embeddings
+from langchain_huggingface import HuggingFaceEmbeddings   # for Instructor models
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI  # for OpenAI models
+
 from htmlTemplates import css, bot_template, user_template
+
 
 def get_pdf_text(pdf_docs):
     text = ""
@@ -60,7 +71,7 @@ def main():
     st.write(css, unsafe_allow_html=True)
 
     if "conversation" not in st.session_state:
-        st.session_state.conversaion = None
+        st.session_state.conversation = None
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = None
 
