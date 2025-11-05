@@ -1,7 +1,7 @@
 streamlit==1.38.0
-langchain==0.2.13
-langchain-core==0.2.30
-langchain-community==0.2.13
+langchain==0.2.14
+langchain-core==0.2.35
+langchain-community==0.2.14
 langchain-huggingface==0.1.0
 langchain-openai==0.1.14
 huggingface_hub==0.24.6
