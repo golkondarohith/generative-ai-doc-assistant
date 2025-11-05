@@ -1,22 +1,12 @@
 import streamlit as st
 from dotenv import load_dotenv
 from pypdf import PdfReader
-
-# ✅ Text splitter is still in core langchain
 from langchain.text_splitter import CharacterTextSplitter
-
-# ✅ Vector store integrations live in langchain_community
 from langchain_community.vectorstores import FAISS
-
-# ✅ Conversational chain is core, so this stays the same
 from langchain.chains import ConversationalRetrievalChain
-
-# ✅ Memory is core
 from langchain.memory import ConversationBufferMemory
-
-# ✅ Embeddings
-from langchain_huggingface import HuggingFaceEmbeddings   # for Instructor models
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI  # for OpenAI models
+from langchain_huggingface import HuggingFaceEmbeddings   
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI  
 
 from htmlTemplates import css, bot_template, user_template
 
