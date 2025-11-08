@@ -23,6 +23,6 @@ def extract_text_from_image(pdf_path):
 
 
 
-
-pdf_path = "Software process workflows and Iteration workflows.pdf"
-extract_text_from_image(pdf_path)
+if __name__ == "__main__":
+    pdf_path = "Software process workflows and Iteration workflows.pdf"
+    extract_text_from_image(pdf_path)
