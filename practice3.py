@@ -13,7 +13,7 @@ def extract_text_from_image(pdf_path):
         for image_number, image_file_object in enumerate(page.images, start=1):
             image = Image.open(io.BytesIO(image_file_object.data)).convert("RGB")
 
-
+            
             # Step 1
             text_content = extract_text(image)
             print(f"Page Number {page_number}")

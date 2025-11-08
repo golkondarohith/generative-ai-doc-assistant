@@ -8,19 +8,29 @@ from langchain.memory import ConversationBufferMemory
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import ChatOpenAI
 from htmlTemplates import css, bot_template, user_template
+import io
+from PIL import Image
+from practice4 import extract_text
 
 
 # ---------- Helper Functions ----------
 
 def get_pdf_text(pdf_docs):
     """Extract raw text from uploaded PDF files."""
-    text = ""
+    text = []
     for pdf in pdf_docs:
         pdf_reader = PdfReader(pdf)
         for page in pdf_reader.pages:
             content = page.extract_text()
             if content:
-                text += content
+                text.append(content.strip())
+
+            if hasattr(page, "images"):
+                for image_file_object in page.images:
+                    image = Image.open(io.BytesIO(image_file_object.data)).convert("RGB")
+                    image_text = extract_text(image)
+                    if image_text:
+                        text.append(image_text)
     return text
 
 
@@ -90,8 +100,9 @@ def main():
             if pdf_docs:
                 with st.spinner("Processing..."):
                     raw_text = get_pdf_text(pdf_docs)
+                    st.write(raw_text)
                     text_chunks = get_text_chunks(raw_text)
-                    st.write(text_chunks)
+                    # st.write(text_chunks)
                     vectorstore = get_vectorstore(text_chunks)
                     st.session_state.conversation = get_conversation_chain(vectorstore)
                 st.success("✅ Documents processed successfully!")
