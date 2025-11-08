@@ -1,7 +1,15 @@
 from pypdf import PdfReader
 from PIL import Image
-from practice3 import extract_text
+import pytesseract
 import io
+
+
+
+def extract_text(image: Image.Image):
+    """Extract text from a Pillow image using OCR (Tesseract)."""
+    text = pytesseract.image_to_string(image)
+    return text.strip()
+
 
 def get_pdf_text(pdf_docs):
     """Extract raw text from uploaded PDF files."""
